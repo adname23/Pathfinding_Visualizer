@@ -1,3 +1,5 @@
+This application is a path finding visualizer which is used as a tool to help understand how path finding algorithms work. So far I have implemented a non-weighted Dijskatra's algorithm.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
