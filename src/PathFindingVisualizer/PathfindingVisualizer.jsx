@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
+import styled from 'styled-components'
 import {dijkstra, getNodesInShortestPathOrder} from '../Algorithms/dijkstra';
 
 import './PathfindingVisualizer.css';
@@ -78,9 +79,9 @@ export default class PathfindingVisualizer extends Component {
 
     return (
       <>
-        <button onClick={() => this.visualizeDijkstra()}>
+        <Button onClick={() => this.visualizeDijkstra()}>
           Visualize Dijkstra's Algorithm
-        </button>
+        </Button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
@@ -144,3 +145,14 @@ const getNewGridWithWallToggled = (grid, row, col) => {
   newGrid[row][col] = newNode;
   return newGrid;
 };
+
+const Button = styled.button`
+  background-color: black;
+  color: white;
+  font-size: 20px;
+  align-items: top;
+  padding: 10px 60px;
+  border-radius: 5px;
+  margin: 10px 0px;
+  cursor: pointer;
+`;
