@@ -2,7 +2,7 @@
   "name": "my-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://aembar.github.io/Pathfinding_Visualizer",
+  "homepage": "https://aembar.github.io/PathfindingVisualizer",
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
@@ -10,14 +10,16 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-scripts": "4.0.1",
+    "sass": "^1.30.0",
     "styled-components": "^4.4.1",
-    "web-vitals": "^0.2.4"
+    "web-vitals": "^0.2.4",
+    "yarn": "^1.22.11"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "predeploy": "yarn run build",
-    "deploy": "gh-pages -d build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

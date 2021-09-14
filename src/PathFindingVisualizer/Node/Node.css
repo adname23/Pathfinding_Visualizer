@@ -6,11 +6,11 @@
 }
 
 .node-finish {
-    background-color: red;
+    background-color: rgb(223, 5, 70);
 }
 
 .node-start {
-    background-color: green;
+    background-color: rgb(4, 255, 100);
 }
 
 .node-visited {
@@ -27,12 +27,12 @@
   @keyframes visitedAnimation {
     0% {
       transform: scale(0.3);
-      background-color: rgba(0, 0, 66, 0.75);
+      background-color: rgba(9, 6, 180, 0.75);
       border-radius: 100%;
     }
   
     50% {
-      background-color: rgba(17, 104, 217, 0.75);
+      background-color: rgba(17, 97, 217, 0.75);
     }
   
     75% {
@@ -59,11 +59,12 @@
 
   @keyframes wallAnimation {
     50% {
-        background-color: rgba(234, 0, 255, 0.75);
+      transform: scale(0.9);
+      background-color: rgba(179, 11, 194, 0.904);
       }
     100% {
       transform: scale(1);
-      background-color: rgba(108, 0, 197, 0.75);
+      background-color: rgb(70, 0, 128);
     }
   }
   
