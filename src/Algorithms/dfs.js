@@ -1,46 +1,41 @@
-export function dfs(grid, startNode, finishNode) {
-    const visitedNodesInOrder = [];
-    const nextNodesStack = [];
-    nextNodesStack.push(startNode);
-    while (nextNodesStack.length) {
-      const currentNode = nextNodesStack.pop();
-  
-      if (currentNode === finishNode) {
-        return visitedNodesInOrder;
-      }
-  
-      if (!currentNode.isWall &&(currentNode.isStart || !currentNode.isVisited)) {
-        currentNode.isVisited = true;
-        visitedNodesInOrder.push(currentNode);
-  
-        const {col, row} = currentNode;
-        let nextNode;
+export function dfs(area, beg, end) {
+    const nodes = [];
+    const stack = [];
+    stack.push(beg);
+    while (stack.length) {
+      var curr = stack.pop();
+      if (curr === end) {return nodes;}
+      if ((curr.isStart || !curr.isVisited) && !curr.isWall ) {
+        nodes.push(curr);
+        curr.isVisited = true;
+        const {column, row} = curr;
+        let next;
+        if (column > 0) {
+          next = area[row][column - 1]; 
+          if (next.isVisited === False) {//same for all positions
+            next.previousNode = curr;
+            stack.push(next);
+          }
+        }
         if (row > 0) {
-          nextNode = grid[row - 1][col];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
+          next = area[row - 1][column];
+          if (next.isVisited === False) {
+            next.previousNode = curr;
+            stack.push(next);
           }
         }
-        if (row < grid.length - 1) {
-          nextNode = grid[row + 1][col];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
+        if (column < area[0].length - 1) {
+          next = area[row][column + 1];
+          if (next.isVisited === False) {
+            next.previousNode = curr;
+            stack.push(next);
           }
         }
-        if (col > 0) {
-          nextNode = grid[row][col - 1];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
-          }
-        }
-        if (col < grid[0].length - 1) {
-          nextNode = grid[row][col + 1];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
+        if (row < area.length - 1) {
+          next = area[row + 1][column];
+          if (next.isVisited === False) {
+            next.previousNode = curr;
+            stack.push(next);
           }
         }
       }
