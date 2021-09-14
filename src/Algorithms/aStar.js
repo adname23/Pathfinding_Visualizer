@@ -1,31 +1,24 @@
-// Returns all nodes in the order in which they were visited.
-// Make nodes point back to their previous node so that we can compute the shortest path
-// by backtracking from the finish node.
-
-export function AStar(grid, startNode, finishNode) {
-    const visitedNodesInOrder = [];
-    startNode.distance = 0;
-    const unvisitedNodes = getAllNodes(grid); // Q: different from using grid or slice of grid???
+export function AStar(area, start, end) {
+    const nodes = [];
+    start.distance = 0;
+    const unreached = getNodes(area); 
   
-    while (unvisitedNodes.length) {
-      sortByDistance(unvisitedNodes);
-      const closestNode = unvisitedNodes.shift();
-      // If we encounter a wall, we skip it.
-      if (!closestNode.isWall) {
-        // If the closest node is at a distance of infinity,
-        // we must be trapped and should stop.
-        if (closestNode.distance === Infinity) return visitedNodesInOrder;
-        closestNode.isVisited = true;
-        visitedNodesInOrder.push(closestNode);
-        if (closestNode === finishNode) return visitedNodesInOrder;
-        updateUnvisitedNeighbors(closestNode, grid);
+    while (unreached.length) {
+      sortDist(unreached);
+      const closest = unreached.shift();
+      if (closest.isWall === False) {
+        if (closest.distance === Infinity) return nodes;
+        nodes.push(closest);
+        closest.isVisited = true;
+        if (closest === end) return nodes;
+        updateUnvisited(closest, area);
       }
     }
   }
   
-  function getAllNodes(grid) {
+  function getNodes(area) {
     const nodes = [];
-    for (const row of grid) {
+    for (const row of area) {
       for (const node of row) {
         nodes.push(node);
       }
@@ -33,24 +26,25 @@ export function AStar(grid, startNode, finishNode) {
     return nodes;
   }
   
-  function sortByDistance(unvisitedNodes) {
-    unvisitedNodes.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
+  function sortDist(unvisited) {
+    unvisited.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
   }
   
-  function updateUnvisitedNeighbors(node, grid) {
-    const unvisitedNeighbors = getUnvisitedNeighbors(node, grid);
-    for (const neighbor of unvisitedNeighbors) {
-      neighbor.distance = node.distance + 1 + neighbor.distanceToFinishNode;
-      neighbor.previousNode = node;
+  function updateUnvisited(node, area) {
+    const unvisited = getUnvisited(node, area);
+    for (const node of unvisited) {
+      node.distance = node.distance + 1 + node.distanceToFinishNode;
+      node.previousNode = node;
     }
   }
   
-  function getUnvisitedNeighbors(node, grid) {
-    const neighbors = [];
-    const {col, row} = node;
-    if (row > 0) neighbors.push(grid[row - 1][col]);
-    if (row < grid.length - 1) neighbors.push(grid[row + 1][col]);
-    if (col > 0) neighbors.push(grid[row][col - 1]);
-    if (col < grid[0].length - 1) neighbors.push(grid[row][col + 1]);
-    return neighbors.filter(neighbor => !neighbor.isVisited);
+  function getUnvisited(node, area) {
+    const nodes = [];
+    const {column, row} = node;
+    if (column > 0) nodes.push(area[row][column - 1]);
+    if (row > 0) nodes.push(area[row - 1][column]);
+    if (column < area[0].length - 1) nodes.push(area[row][column + 1]);
+    if (row < area.length - 1) nodes.push(area[row + 1][column]);
+    
+    return nodes.filter(neighbor => !neighbor.isVisited);
   }
