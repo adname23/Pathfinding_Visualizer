@@ -2,7 +2,7 @@ This application is a path finding visualizer which is used as a tool to help un
 
 View the project throught through this link: https://aembar.github.io/Pathfinding_Visualizer
 
-![](Screen Shot 2021-09-14 at 11.08.14 AM.png)
+![](Screen%20Shot%202021-09-14%20at%2011.08.14%20AM.png)
 
 # Getting Started with Create React App
 
