@@ -1,4 +1,4 @@
-This application is a path finding visualizer which is used as a tool to help understand how path finding algorithms work. So far I have implemented a non-weighted Dijskatra's algorithm. Click(and/or drag your mouse) to add walls and refresh the page restart the visualizer. 
+This application is a path finding visualizer which is used as a tool to help understand how path finding algorithms work. This visualizer shows Dijkstra's, A-Star, BFS(Breadth First Search), and DFS(Depth First Search). Click(and/or drag your mouse) to add walls, there are also buttons for removing all the walls and the previous path. 
 
 View the project throught through this link: https://aembar.github.io/Pathfinding_Visualizer
 
