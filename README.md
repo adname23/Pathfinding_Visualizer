@@ -2,6 +2,8 @@ This application is a path finding visualizer which is used as a tool to help un
 
 View the project throught through this link: https://aembar.github.io/Pathfinding_Visualizer
 
+![](Screen Shot 2021-09-14 at 11.08.14 AM.png)
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
