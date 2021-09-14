@@ -1,51 +1,44 @@
-// Returns all nodes in the order in which they were visited.
-// Make nodes point back to their previous node so that we can compute the shortest path
-// by backtracking from the finish node.
-
-export function bfs(grid, startNode, finishNode) {
-    const visitedNodesInOrder = [];
-    let nextNodesStack = [startNode];
-    while (nextNodesStack.length) {
-      const currentNode = nextNodesStack.shift();
-      if (currentNode === finishNode) return visitedNodesInOrder;
+export function bfs(area, start, finish) {
+    const nodes = [];
+    let stack = [start];
+    while (stack.length) {
+      const curr = stack.shift();
+      if (curr === finish) return nodes;
   
-      if (
-        !currentNode.isWall &&
-        (currentNode.isStart || !currentNode.isVisited)
-      ) {
-        currentNode.isVisited = true;
-        visitedNodesInOrder.push(currentNode);
-        const {col, row} = currentNode;
-        let nextNode;
+      if ((curr.isStart || !curr.isVisited) && !curr.isWall) {
+        nodes.push(curr);
+        const {column, row} = curr;
+        let next;
+        curr.isVisited = true;
         if (row > 0) {
-          nextNode = grid[row - 1][col];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
+          next = area[row - 1][column];
+          if (next.isVisited === False) { //repeat for all positions
+            next.previousNode = curr;
+            stack.push(next);
           }
         }
-        if (row < grid.length - 1) {
-          nextNode = grid[row + 1][col];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
+        if (column < area[0].length - 1) {
+          next = area[row][column + 1];
+          if (next.isVisited === False) {
+            next.previousNode = curr;
+            stack.push(next);
           }
         }
-        if (col > 0) {
-          nextNode = grid[row][col - 1];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
+        if (row < area.length - 1) {
+          next = area[row + 1][column];
+          if (next.isVisited === False) {
+            next.previousNode = curr;
+            stack.push(next);
           }
         }
-        if (col < grid[0].length - 1) {
-          nextNode = grid[row][col + 1];
-          if (!nextNode.isVisited) {
-            nextNode.previousNode = currentNode;
-            nextNodesStack.push(nextNode);
+        if (column > 0) {
+          next = area[row][column - 1];
+          if (next.isVisited === False) {
+            next.previousNode = curr;
+            stack.push(next);
           }
         }
+        
       }
     }
-    // return visitedNodesInOrder;
   }
